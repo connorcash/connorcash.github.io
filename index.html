@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+          "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>I'm Connor</title>
+    <meta name="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="jquery.console.js"></script>
+    <script type="text/javascript">
+        // I can't believe you're letting me run code in your browser
+        var files = 'cv.s  cv.py'
+        var output = function(data)
+        {
+            var prompt = $(".jquery-console-prompt-box:last").prev();
+            prompt.append(data);
+        }
+        var handle = function(line, report)
+        {
+        setTimeout(function () {
+            var command = line.split(" ")[0];
+            var arg1 = line.split(" ")[1];
+            if (command == "ls")  // ls called
+            {
+                report([{msg:files,
+                         className:"jquery-console-message"}]);
+            }
+            else if (command == "cat")  // cat called
+            {
+                if (arg1 == "cv.s")
+                {
+                    $.get("cv.s.html", function(data){
+                        output(data);
+                    });
+                }
+                else if (arg1 == "cv.py")
+                {
+                    $.get("cv.py.html", function(data){
+                        output(data);
+                    });
+                }
+                report();
+            }
+            else if (command == "clear")  // clear called
+            {
+                $(".jquery-console-prompt-box").remove();
+                $(".jquery-console-message").remove();
+                $(".jquery-console-message-error").remove();
+                report();
+            }
+            else
+            {
+                report([{msg:"cjsh: command not found: " + command,
+                        className:"jquery-console-message"}]);
+            }
+        }, 1000);
+        }
+        $(document).ready(function(){
+            var consoleCancelFlag = false;
+            var console = $('<div class="console">');
+            $('body').append(console);
+            var controller = console.console({
+            autofocus: true,
+            welcomeMessage: 'cjsh 0.0.1\nSupported commands: ls, cat, clear',
+            promptLabel: '> ',
+            commandValidate:function(line){
+                if (line == "") return false;
+                else return true;
+            },
+            commandHandle:handle,
+            animateScroll:true,
+            promptHistory:true
+        });
+        });
+    </script>
+    <link rel="stylesheet" type="text/css" href="syntax.css">
+    <style type="text/css" media="screen">
+      body { background-color:#000; }
+      div.console { word-wrap: break-word; }
+      div.console { font-size: 14px }
+      div.console div.jquery-console-inner
+       { width:100hv; height:100vh; background:#000; padding:0.5em;
+         overflow:auto }
+      div.console div.jquery-console-prompt-box
+       { color:#0FBFF2; font-family:monospace; }
+      div.console div.jquery-console-focus span.jquery-console-cursor
+       { background:#0FBFF2; color:#0FBFF2; font-weight:bold }
+      div.console div.jquery-console-message-error
+       { color:#0FBFF2; font-family:sans-serif; font-weight:bold;
+         padding:0.1em; }
+      div.console div.jquery-console-message
+       { color:#0FBFF2; font-family:monospace;
+         padding:0.1em; }
+      div.console span.jquery-console-prompt-label { font-weight:bold }
+    </style>
+  </head>
+  <body>
+  </body>
+</html>

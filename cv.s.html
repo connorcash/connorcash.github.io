@@ -1,0 +1,18 @@
+<div class="highlight"><pre><span class="c"># as -arch x86_64 -o cv.o</span>
+<span class="c"># ld -e _main -arch x86_64 -o cv cv.o</span>
+<span class="na">.data</span>
+<span class="nl">greet:</span>
+    <span class="na">.ascii</span> <span class="s">&quot;Hello, my name is Connor. If I do anything notable, it&#39;ll be listed below.\10\0&quot;</span>
+<span class="nl">greet_len:</span>
+    <span class="na">.long</span> <span class="p">.</span> <span class="p">-</span> <span class="no">greet</span>
+
+<span class="na">.text</span>
+<span class="na">.globl</span> <span class="no">_main</span>
+<span class="nl">_main:</span>
+    <span class="nf">movq</span> <span class="no">$4</span><span class="p">,</span> <span class="nv">%rax</span>  <span class="c"># SYS_write - OS X</span>
+    <span class="nf">movq</span> <span class="no">$1</span><span class="p">,</span> <span class="nv">%rdi</span>  <span class="c"># stdout</span>
+    <span class="nf">movq</span> <span class="no">greet@GOTPCREL</span><span class="p">(</span><span class="nv">%rip</span><span class="p">),</span> <span class="nv">%rsi</span>
+    <span class="nf">syscall</span>
+    <span class="nf">xorq</span> <span class="nv">%rax</span><span class="p">,</span> <span class="nv">%rax</span>
+    <span class="nf">ret</span>
+</pre></div>
