@@ -8,7 +8,8 @@
     <script type="text/javascript" src="jquery.console.js"></script>
     <script type="text/javascript">
         // I can't believe you're letting me run code in your browser
-        var files = 'cv.s  cv.py'
+        $.ajaxSetup({ cache: false });
+        var files = 'cv.s  cv.py';
         var output = function(data)
         {
             var prompt = $(".jquery-console-prompt-box:last").prev();
