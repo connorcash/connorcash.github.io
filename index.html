@@ -11,7 +11,7 @@
         $.ajaxSetup({ cache: false });
 
         var files = 'cv.s  cv.py'
-        var commands = 'ls, cat, clear'
+        var commands = 'ls, cat, clear, whoami'
         var output = function(data)
         {
             var prompt = $(".jquery-console-prompt-box:last").prev()
@@ -49,6 +49,13 @@
                     report([{msg:"cat: " + arg1 + ": No such file or directory",
                              className:"jquery-console-message"}])
                 }
+            }
+            else if (command == "whoami")
+            {
+                $.get("whoami.html", function(data){
+                    output(data)
+                })
+                report()
             }
             else if (command == "clear")  // clear called
             {
