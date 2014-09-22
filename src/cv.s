@@ -4,7 +4,7 @@
 
 .cstring
 greet:
-    .ascii "Hello, my name is Connor. If I do anything notable, it'll be listed below.\n\n"
+    .ascii "Hello, my name is Connor. I love reversing!\n\n"
 
 .text
 .globl _main

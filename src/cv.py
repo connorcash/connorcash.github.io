@@ -13,6 +13,5 @@ class Connor(object):
 
 
 if __name__ == "__main__":
-    i = Connor("Cash", interests=["short walks on the beach", "DotA 2",
-                                  "ruining coders' day", "and sleeping"])
+    i = Connor("Cash", interests=["Python", "DotA 2"])
     print(i)

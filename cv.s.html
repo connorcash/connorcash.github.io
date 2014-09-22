@@ -1,9 +1,10 @@
-<div class="highlight"><pre><span class="c"># as -arch x86_64 -o cv.o cv.s</span>
+<div class="highlight"><pre><span class="c"># to build and link on OS X:</span>
+<span class="c"># as -arch x86_64 -o cv.o cv.s</span>
 <span class="c"># ld -arch x86_64 -lSystem -o cv cv.o</span>
 
 <span class="na">.cstring</span>
 <span class="nl">greet:</span>
-    <span class="na">.ascii</span> <span class="s">&quot;Hello, my name is Connor. If I do anything notable, it&#39;ll be listed below.&quot;</span>
+    <span class="na">.ascii</span> <span class="s">&quot;Hello, my name is Connor. I love reversing!\n\n&quot;</span>
 
 <span class="na">.text</span>
 <span class="na">.globl</span> <span class="no">_main</span>
